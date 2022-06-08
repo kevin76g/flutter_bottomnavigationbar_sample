@@ -4,6 +4,9 @@ import 'package:flutter_bottomnavigationbar_sample/widget/screen_content_widget.
 
 const applicationTitle = 'BottomNavigationBar Sample';
 
+//Special thanks to Unsplash. All images are provided by Unsplash.
+//https://unsplash.com/
+
 void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
