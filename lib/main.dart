@@ -1,108 +1,47 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bottomnavigationbar_sample/widget/bottom_navigation_bar.dart';
+import 'package:flutter_bottomnavigationbar_sample/widget/screen_content_widget.dart';
 
-void main() {
-  runApp(const MyApp());
-}
+const applicationTitle = 'BottomNavigationBar Sample';
 
-const imagePath = 'assets/images/fish1.jpeg';
+void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
-  // This widget is the root of your application.
+  static const String _title = 'Flutter Code Sample';
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: const MyHomePage(title: 'Flutter BottomNavigationBar Sample'),
+    return const MaterialApp(
+      title: _title,
+      home: MyStatefulWidget(),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
-
-  final String title;
+class MyStatefulWidget extends StatefulWidget {
+  const MyStatefulWidget({Key? key}) : super(key: key);
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<MyStatefulWidget> createState() => _MyStatefulWidgetState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _MyStatefulWidgetState extends State<MyStatefulWidget> {
+  final int index = 0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: const Text(applicationTitle),
       ),
-      body: Container(
-        padding: const EdgeInsets.symmetric(vertical: 30.0),
-        alignment: Alignment.center,
-        child: Card(
-          clipBehavior: Clip.antiAlias,
-          child: ListView(
-            children: [
-              ListTile(
-                leading: const Icon(Icons.arrow_drop_down_circle),
-                title: const Text(
-                  'Roses and trams',
-                  style: TextStyle(fontSize: 20.0),
-                ),
-                subtitle: Text(
-                  'バラと路面電車',
-                  style: TextStyle(color: Colors.black.withOpacity(0.6)),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Text(
-                  'The pink roses are in full bloom.The pink roses are in full bloom.The pink roses are in full bloom.',
-                  style: TextStyle(color: Colors.black.withOpacity(0.6)),
-                ),
-              ),
-              ButtonBar(
-                alignment: MainAxisAlignment.start,
-                children: [
-                  TextButton(
-                    onPressed: () {
-                      // Perform some action
-                    },
-                    child: const Text(
-                      'GET THE ROSE',
-                      style: TextStyle(color: Color(0xFF6200EE)),
-                    ),
-                  ),
-                  TextButton(
-                    onPressed: () {
-                      // Perform some action
-                    },
-                    child: const Text(
-                      'NO THANKS',
-                      style: TextStyle(color: Color(0xFF6200EE)),
-                    ),
-                  ),
-                ],
-              ),
-              FittedBox(
-                fit: BoxFit.fill,
-                child: Image.asset(
-                  imagePath,
-                ),
-              ),
-              // Image.asset('assets/card-sample-image-2.jpg'),
-            ],
-          ),
-        ),
+      body: ScreenContentWidget(
+        index: index,
       ),
-
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      bottomNavigationBar: MyBottomNavigationBar(
+        selectedIndex: index,
+      ),
     );
   }
 }
